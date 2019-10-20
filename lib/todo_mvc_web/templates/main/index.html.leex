@@ -6,8 +6,21 @@
     </form>
   </header>
   <section class="main">
-    <input id="toggle-all" class="toggle-all" type="checkbox">
-    <label for="toggle-all">Mark all as complete</label>
+    <%= if Enum.any?(@todos) do %>
+      <%= content_tag :input,
+        nil,
+        type: "checkbox",
+        id: "toggle-all",
+        class: "toggle-all",
+        name: "toggle-all",
+        phx_click: "toggle-all",
+        phx_value_checked: all_todos_completed?(@todos) |> to_string(),
+        checked: if all_todos_completed?(@todos), do: "checked"
+      %>
+      <label for="toggle-all">Mark all as complete</label>
+      <%# <form phx-change="toggle-all">
+      </form> %>
+    <% end %>
     <ul class="todo-list">
       <%= for todo <- @todos do %>
         <%= content_tag :li, class: todo_classes(todo) do %>

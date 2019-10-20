@@ -37,4 +37,16 @@ defmodule TodoMVCWeb.MainLive do
 
     {:noreply, assign(socket, todos: todos)}
   end
+
+  def handle_event("toggle-all", %{"checked" => "false"}, socket) do
+    todos = socket.assigns[:todos] |> Enum.map(&Todo.complete/1)
+
+    {:noreply, assign(socket, todos: todos)}
+  end
+
+  def handle_event("toggle-all", _params, socket) do
+    todos = socket.assigns[:todos] |> Enum.map(&Todo.activate/1)
+
+    {:noreply, assign(socket, todos: todos)}
+  end
 end
