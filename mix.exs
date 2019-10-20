@@ -40,7 +40,8 @@ defmodule TodoMVC.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.3.0"},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:uuid, "~> 1.1"}
     ]
   end
 end

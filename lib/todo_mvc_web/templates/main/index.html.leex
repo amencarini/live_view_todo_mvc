@@ -1,12 +1,30 @@
 <section class="todoapp">
   <header class="header">
     <h1>todos</h1>
-    <input class="new-todo" placeholder="What needs to be done?" autofocus>
+    <form phx-submit="add-todo">
+      <input name="text" class="new-todo" placeholder="What needs to be done?" autofocus>
+    </form>
   </header>
   <section class="main">
     <input id="toggle-all" class="toggle-all" type="checkbox">
     <label for="toggle-all">Mark all as complete</label>
-    <ul class="todo-list"></ul>
+    <ul class="todo-list">
+      <%= for todo <- @todos do %>
+        <%= content_tag :li do %>
+          <div class="view">
+            <%= content_tag :input,
+              nil,
+              type: "checkbox",
+              class: "toggle"
+            %>
+            <label>
+              <%= todo.text %>
+            </label>
+            <button class="destroy"></button>
+          </div>
+        <% end %>
+      <% end %>
+    </ul>
   </section>
   <footer class="footer">
     <span class="todo-count"></span>
