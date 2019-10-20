@@ -20,7 +20,7 @@
             <label>
               <%= todo.text %>
             </label>
-            <button class="destroy"></button>
+            <button class="destroy" phx-click="destroy" phx-value-todo-id="<%= todo.id %>"></button>
           </div>
         <% end %>
       <% end %>

@@ -20,4 +20,10 @@ defmodule TodoMVCWeb.MainLive do
 
     {:noreply, assign(socket, todos: todos)}
   end
+
+  def handle_event("destroy", %{"todo-id" => id}, socket) do
+    todos = socket.assigns[:todos] |> Enum.reject(fn t -> t.id == id end)
+
+    {:noreply, assign(socket, todos: todos)}
+  end
 end
