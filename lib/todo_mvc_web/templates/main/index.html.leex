@@ -10,12 +10,15 @@
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
       <%= for todo <- @todos do %>
-        <%= content_tag :li do %>
+        <%= content_tag :li, class: todo_classes(todo) do %>
           <div class="view">
             <%= content_tag :input,
               nil,
               type: "checkbox",
-              class: "toggle"
+              class: "toggle",
+              phx_click: "toggle",
+              phx_value_todo_id: todo.id,
+              checked: if todo.state == "completed", do: "checked"
             %>
             <label>
               <%= todo.text %>

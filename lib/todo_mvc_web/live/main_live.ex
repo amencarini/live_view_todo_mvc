@@ -26,4 +26,15 @@ defmodule TodoMVCWeb.MainLive do
 
     {:noreply, assign(socket, todos: todos)}
   end
+
+  def handle_event("toggle", %{"todo-id" => id}, socket) do
+    toggle = fn
+      %Todo{id: ^id} = todo -> Todo.toggle(todo)
+      todo -> todo
+    end
+
+    todos = socket.assigns[:todos] |> Enum.map(toggle)
+
+    {:noreply, assign(socket, todos: todos)}
+  end
 end

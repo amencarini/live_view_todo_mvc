@@ -7,24 +7,10 @@ defmodule TodoMVC.Todo do
     %__MODULE__{id: UUID.uuid4(), text: text, state: "active"}
   end
 
-  # @spec toggle(__MODULE__.t()) :: __MODULE__.t()
-  # def toggle(todo) do
-  #   new_state =
-  #     case todo.state do
-  #       "completed" -> "active"
-  #       "active" -> "completed"
-  #     end
+  def toggle(%__MODULE__{state: "active"} = todo), do: complete(todo)
+  def toggle(%__MODULE__{state: "completed"} = todo), do: activate(todo)
 
-  #   %{todo | state: new_state}
-  # end
+  def complete(todo), do: %{todo | state: "completed"}
 
-  # @spec complete(__MODULE__.t()) :: __MODULE__.t()
-  # def complete(todo) do
-  #   %{todo | state: "completed"}
-  # end
-
-  # @spec activate(__MODULE__.t()) :: __MODULE__.t()
-  # def activate(todo) do
-  #   %{todo | state: "active"}
-  # end
+  def activate(todo), do: %{todo | state: "active"}
 end
