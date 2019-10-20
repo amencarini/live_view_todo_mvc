@@ -21,6 +21,8 @@ defmodule TodoMVCWeb do
     quote do
       use Phoenix.Controller, namespace: TodoMVCWeb
 
+      import Phoenix.LiveView.Controller
+
       import Plug.Conn
       import TodoMVCWeb.Gettext
       alias TodoMVCWeb.Router.Helpers, as: Routes
@@ -32,6 +34,9 @@ defmodule TodoMVCWeb do
       use Phoenix.View,
         root: "lib/todo_mvc_web/templates",
         namespace: TodoMVCWeb
+
+      import Phoenix.LiveView,
+        only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -50,6 +55,7 @@ defmodule TodoMVCWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
