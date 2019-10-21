@@ -21,7 +21,7 @@
     <% end %>
     <ul class="todo-list">
       <%= for todo <- @todos, todo_visible?(todo, @filter) do %>
-        <%= content_tag :li, class: todo_classes(todo) do %>
+        <%= content_tag :li, class: todo_classes(todo), phx_hook: "Todo" do %>
           <div class="view">
             <%= content_tag :input,
               nil,
@@ -36,6 +36,15 @@
             </label>
             <button class="destroy" phx-click="destroy" phx-value-todo-id="<%= todo.id %>"></button>
           </div>
+          <form phx-change="change" phx-submit="change">
+            <input
+              class="edit"
+              name="title"
+              phx-value-todo-id="<%= todo.id %>"
+              phx-blur="stop-editing"
+              value="<%= todo.text %>"
+            >
+          </form>
         <% end %>
       <% end %>
     </ul>

@@ -19,5 +19,25 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
-let liveSocket = new LiveSocket("/live", Socket)
+let Hooks = {}
+Hooks.Todo = {
+  mounted() {
+    this.el.addEventListener("dblclick", e => {
+      const toggle = this.el.querySelector(".toggle")
+
+      this.pushEvent("edit", {
+        "todo-id": toggle.getAttribute("phx-value-todo-id")
+      })
+    })
+  },
+  updated() {
+    const edit = this.el.querySelector(".edit")
+    edit.focus()
+    edit.setSelectionRange(edit.value.length, edit.value.length);
+  }
+}
+
+let liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks
+})
 liveSocket.connect()

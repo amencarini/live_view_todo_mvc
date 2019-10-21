@@ -1,10 +1,14 @@
 defmodule TodoMVCWeb.MainView do
   use TodoMVCWeb, :view
 
-  alias TodoMVC.Todo
-
-  def todo_classes(%Todo{state: "completed"}), do: "completed"
-  def todo_classes(_), do: ""
+  def todo_classes(todo) do
+    [
+      if(todo.editing, do: "editing"),
+      if(todo.state == "completed", do: "completed")
+    ]
+    |> Enum.reject(&is_nil/1)
+    |> Enum.join(" ")
+  end
 
   def all_todos_completed?(todos) do
     !Enum.any?(todos, fn t -> t.state == "active" end)
