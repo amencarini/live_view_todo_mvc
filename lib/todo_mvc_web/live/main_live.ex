@@ -8,7 +8,7 @@ defmodule TodoMVCWeb.MainLive do
   end
 
   def mount(_params, socket) do
-    {:ok, assign(socket, todos: [Todo.new("test!")])}
+    {:ok, assign(socket, todos: [])}
   end
 
   def handle_event("add-todo", %{"text" => ""}, socket) do
