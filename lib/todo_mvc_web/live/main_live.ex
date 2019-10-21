@@ -2,15 +2,19 @@ defmodule TodoMVCWeb.MainLive do
   use Phoenix.LiveView
 
   alias TodoMVC.Todo
+  alias Phoenix.LiveView.Socket
 
+  @spec render(map) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do
     Phoenix.View.render(TodoMVCWeb.MainView, "index.html", assigns)
   end
 
+  @spec mount(map, Socket.t()) :: {:ok, Socket.t()}
   def mount(_params, socket) do
     {:ok, assign(socket, todos: [], filter: "all")}
   end
 
+  @spec handle_params(map, binary, Socket.t()) :: {:noreply, Socket.t()}
   def handle_params(%{"filter" => filter}, _uri, socket) do
     {:noreply, assign(socket, filter: filter)}
   end
@@ -19,6 +23,7 @@ defmodule TodoMVCWeb.MainLive do
     {:noreply, socket}
   end
 
+  @spec handle_event(binary, map, Socket.t()) :: {:noreply, Socket.t()}
   def handle_event("add-todo", %{"text" => ""}, socket) do
     {:noreply, socket}
   end

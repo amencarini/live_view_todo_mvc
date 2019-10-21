@@ -41,7 +41,8 @@ defmodule TodoMVC.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.3.0"},
       {:floki, ">= 0.0.0", only: :test},
-      {:uuid, "~> 1.1"}
+      {:uuid, "~> 1.1"},
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false}
     ]
   end
 end
