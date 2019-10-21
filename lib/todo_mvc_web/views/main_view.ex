@@ -9,4 +9,7 @@ defmodule TodoMVCWeb.MainView do
   def all_todos_completed?(todos) do
     !Enum.any?(todos, fn t -> t.state == "active" end)
   end
+
+  def selected_class(filter, filter), do: "selected"
+  def selected_class(_current_filter, _filter), do: ""
 end

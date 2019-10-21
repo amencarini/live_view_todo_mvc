@@ -8,7 +8,15 @@ defmodule TodoMVCWeb.MainLive do
   end
 
   def mount(_params, socket) do
-    {:ok, assign(socket, todos: [])}
+    {:ok, assign(socket, todos: [], filter: "all")}
+  end
+
+  def handle_params(%{"filter" => filter}, _uri, socket) do
+    {:noreply, assign(socket, filter: filter)}
+  end
+
+  def handle_params(_params, _uri, socket) do
+    {:noreply, socket}
   end
 
   def handle_event("add-todo", %{"text" => ""}, socket) do
