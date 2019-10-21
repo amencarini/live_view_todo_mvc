@@ -18,8 +18,6 @@
         checked: if all_todos_completed?(@todos), do: "checked"
       %>
       <label for="toggle-all">Mark all as complete</label>
-      <%# <form phx-change="toggle-all">
-      </form> %>
     <% end %>
     <ul class="todo-list">
       <%= for todo <- @todos do %>
@@ -55,6 +53,10 @@
         <a href="#/completed">Completed</a>
       </li>
     </ul>
-    <button class="clear-completed">Clear completed</button>
+    <%= if Enum.any?(@todos, fn t -> t.state == "completed" end) do %>
+      <button class="clear-completed" phx-click="clear-completed">
+        Clear completed
+      </button>
+    <% end %>
   </footer>
 </section>

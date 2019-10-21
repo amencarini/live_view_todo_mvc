@@ -49,4 +49,10 @@ defmodule TodoMVCWeb.MainLive do
 
     {:noreply, assign(socket, todos: todos)}
   end
+
+  def handle_event("clear-completed", _params, socket) do
+    todos = socket.assigns[:todos] |> Enum.reject(fn t -> t.state == "completed" end)
+
+    {:noreply, assign(socket, todos: todos)}
+  end
 end
