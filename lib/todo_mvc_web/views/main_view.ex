@@ -12,4 +12,8 @@ defmodule TodoMVCWeb.MainView do
 
   def selected_class(filter, filter), do: "selected"
   def selected_class(_current_filter, _filter), do: ""
+
+  def todo_visible?(_todo, "all"), do: true
+  def todo_visible?(%{state: state}, state), do: true
+  def todo_visible?(_, _), do: false
 end

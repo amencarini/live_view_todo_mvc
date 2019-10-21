@@ -20,7 +20,7 @@
       <label for="toggle-all">Mark all as complete</label>
     <% end %>
     <ul class="todo-list">
-      <%= for todo <- @todos do %>
+      <%= for todo <- @todos, todo_visible?(todo, @filter) do %>
         <%= content_tag :li, class: todo_classes(todo) do %>
           <div class="view">
             <%= content_tag :input,
